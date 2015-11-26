@@ -1,3 +1,4 @@
+package test;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -22,6 +23,7 @@ public class HelloRDFWorld {
 		r.addProperty(p, "hello world", XSDDatatype.XSDstring);
 		
 		m.write(System.out, "Turtle");
+		
 	}
 
 }
