@@ -8,7 +8,7 @@ import org.apache.jena.vocabulary.VCARD;
 
 /**
  * @author Carlo Geertse
- * Test comment
+ * 
  *
  */
 public class JenaTutorialRoundTwo {
