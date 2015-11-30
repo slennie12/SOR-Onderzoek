@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 import controller.Controller;
 import view.View;
@@ -9,7 +10,7 @@ import view.View;
  * @author Carlo Geertse & Lennart van den Bout
  * The model
  */
-public class Model {
+public class Model extends Observable{
 	private int data;
 	private ArrayList<View> views;
 	private ArrayList<Controller> controllers;
@@ -41,6 +42,17 @@ public class Model {
 		controllers.add(controller);
 	}
 	
+	public void performActions()
+	{
+		data++;
+		setChanged();
+		notifyObservers();
+	}
+	
+	
+	
+	
+	
 	/**
 	 * @param args
 	 * Main method that initializes the program
@@ -48,7 +60,7 @@ public class Model {
 	public static void main(String[] args) {
 		Model model = new Model();
 		View view = new View(model);
-		
+		model.addObserver(view);
 	}
 
 }
