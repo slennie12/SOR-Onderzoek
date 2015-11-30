@@ -18,6 +18,7 @@ public class Model {
 	{
 		data = 77;
 		views = new ArrayList<View>();
+		controllers = new ArrayList<Controller>();
 	}
 	
 	public int getData()
