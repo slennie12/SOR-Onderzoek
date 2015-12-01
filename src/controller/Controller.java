@@ -23,6 +23,7 @@ public class Controller implements Observer{
             {
             	System.out.println("Hij registreert de click");
                 model.performActions();   
+                
             }
         });
 	}
