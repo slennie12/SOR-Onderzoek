@@ -5,14 +5,14 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
-import model.Model;
+import model.DataModel;
 import view.View;
 
 public class Controller implements Observer{
-	private Model model;
+	private DataModel model;
 	private View view;
 	
-	public Controller(Model model, View view)
+	public Controller(DataModel model, View view)
 	{
 		this.model=model;
 		this.view=view;
@@ -29,6 +29,6 @@ public class Controller implements Observer{
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		System.out.println("hij update dingen" + model.getData());		
+		System.out.println("hij update dingen, wel zonder data verwerking test in de controller");		
 	}
 }

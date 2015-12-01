@@ -81,10 +81,7 @@ public class JenaTutorialRoundTwo {
 		// read the RDF/XML file
 		model.read(in, null);
 		// write it to standard out
-		model.write(System.out);
-		
-		Resource hideYourHeart = model.getResource("http://www.recshop.fake/cd/Hide your heart");
-		System.out.println(hideYourHeart);
+		model.write(System.out,"N-TRIPLES");
 	}
 
 }

@@ -1,5 +1,6 @@
 package view;
 
+import java.io.StringWriter;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -8,13 +9,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import controller.Controller;
-import model.Model;
+import model.DataModel;
 
 public class View implements Observer{
-	private Model model;
+	private DataModel model;
 	private JButton button;
 	
-	public View(Model model)
+	public View(DataModel model)
 	{
 		this.model=model;
 		model.attach(this);
@@ -41,7 +42,11 @@ public class View implements Observer{
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		System.out.println("hij update dingen" + model.getData());		
+		String syntax = "N-TRIPLE"; // also try "N-TRIPLE" and "TURTLE"
+		StringWriter out = new StringWriter();
+		model.getModel().write(out,syntax);
+		String result = out.toString();
+		System.out.println("hij update dingen" + result);		
 	}
 	
 	
