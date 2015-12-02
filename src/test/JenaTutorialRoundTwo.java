@@ -1,9 +1,17 @@
 package test;
 import java.io.InputStream;
+import java.util.UUID;
 
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.update.UpdateExecutionFactory;
+import org.apache.jena.update.UpdateFactory;
+import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.util.FileManager;
 import org.apache.jena.vocabulary.VCARD;
 
@@ -24,7 +32,8 @@ public class JenaTutorialRoundTwo {
 	 */
 	public static void main(String[] args) {
 		//rdfWriteTest();
-		rdfReadTest();
+		//rdfReadTest();
+		rdfFusekiTest();
 	}
 	
 	public static void rdfWriteTest()
@@ -84,4 +93,13 @@ public class JenaTutorialRoundTwo {
 		model.write(System.out,"N-TRIPLES");
 	}
 
+	public static void rdfFusekiTest()
+	{
+        //Query the collection, dump output
+        QueryExecution qe = QueryExecutionFactory.sparqlService(
+                "http://localhost:3030/ElvisImpersonators/query", "SELECT * WHERE {?x ?r ?y}");
+        ResultSet results = qe.execSelect();
+        ResultSetFormatter.out(System.out, results);
+        qe.close();
+	}
 }
