@@ -20,7 +20,6 @@ public class View implements Observer{
 	private JButton button;
 	private JFrame frame;
 	private JPanel panel;
-	private JTable table;
 	
 	public View(DataModel model)
 	{
@@ -40,6 +39,7 @@ public class View implements Observer{
 		frame.add(panel);
 		frame.pack();
 		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public JButton getButton()
@@ -62,13 +62,13 @@ public class View implements Observer{
 	//	String strings[];
 		int i = 0;
 		ArrayList<List> lists = new ArrayList<List>();
-		for(splittedTableData.length < 0)
-			
-		}
+		//for(splittedTableData.length() < 0)
+		//	
+		//}
 		String[] colNames = {"Subject", "Predicate","Object"};
 		panel.add(new JTextField(tableData));
-		DefaultTableModel model = new DefaultTableModel(colNames, 4);
-		JTable table = new JTable(model); //kan data niet uit outputstream trekken, is nodig voor aanmaken table
+		DefaultTableModel tableModel = new DefaultTableModel(colNames, 4);
+		JTable table = new JTable(tableModel); //kan data niet uit outputstream trekken, is nodig voor aanmaken table
 		panel.add(table);
 		frame.pack();
 		frame.repaint();
