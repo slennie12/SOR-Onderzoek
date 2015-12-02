@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -34,7 +35,9 @@ public class View implements Observer{
 	private void initGUI()
 	{
 		frame = new JFrame();
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel = new JPanel();
+		panel.setPreferredSize(new Dimension(500,500));
 		button = new JButton();
 		panel.add(button);
 		frame.add(panel);
@@ -70,13 +73,11 @@ public class View implements Observer{
 				lists.add(data);
 				data = new ArrayList<String>();
 			}
-			
-			
 		}
 		String[] colNames = {"Subject", "Predicate","Object"};
 		panel.add(new JTextField(tableData));
-		DefaultTableModel model = new DefaultTableModel(colNames, 4);
-		JTable table = new JTable(model); //kan data niet uit outputstream trekken, is nodig voor aanmaken table
+		DefaultTableModel tableModel = new DefaultTableModel(colNames, 4);
+		JTable table = new JTable(tableModel); //kan data niet uit outputstream trekken, is nodig voor aanmaken table
 		panel.add(table);
 		frame.pack();
 		frame.repaint();
