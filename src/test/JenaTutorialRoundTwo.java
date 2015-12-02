@@ -99,7 +99,6 @@ public class JenaTutorialRoundTwo {
         QueryExecution qe = QueryExecutionFactory.sparqlService(
                 "http://localhost:3030/ElvisImpersonators/query", "SELECT * WHERE {?x ?r ?y}");
         ResultSet results = qe.execSelect();
-        ResultSetFormatter.out(System.out, results);
         qe.close();
 	}
 }
