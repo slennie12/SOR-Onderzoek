@@ -5,9 +5,14 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.ResultSetFactory;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.shared.CannotEncodeCharacterException;
 import org.apache.jena.util.FileManager;
 import org.apache.jena.vocabulary.VCARD;
 
@@ -23,6 +28,9 @@ public class DataModel extends Observable{
 	private Model RDFModel;
 	private ArrayList<View> views;
 	private ArrayList<Controller> controllers;
+	
+	private static String queryURL = "http://localhost:3030/ElvisImpersonators/query";
+	private static String selectAllQuery = "SELECT * WHERE {?x ?r ?y}";
 	
 	public DataModel()
 	{
@@ -94,7 +102,14 @@ public class DataModel extends Observable{
 		return result;
 	}
 	
-	
+	private ResultSet getQueryResult(String queryURL, String query)
+	{
+        try (QueryExecution qexec = QueryExecutionFactory.sparqlService(queryURL, query)) {
+            ResultSet results = qexec.execSelect() ;
+            results = ResultSetFactory.copyResults(results) ;
+            return results ;    // Passes the result set out of the try-resources
+        }
+	}
 	
 	
 	/**
