@@ -1,6 +1,7 @@
 package model;
 
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -78,6 +79,19 @@ public class DataModel extends Observable{
 		RDFModel.read(in, null);
 		// write it to standard out
 		RDFModel.write(System.out,"N-TRIPLES");
+	}
+	
+	/**
+	 * Dingen doet enzo
+	 */
+	public String writeRDFToView(){
+		String syntax = "N-TRIPLE"; // also try "N-TRIPLE" and "TURTLE"
+		StringWriter out = new StringWriter();
+		getModel().write(out,syntax);
+		String result = out.toString();
+		System.out.println("hij update dingen" + result);
+		
+		return result;
 	}
 	
 	

@@ -1,6 +1,5 @@
 package view;
 
-import java.io.StringWriter;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -8,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import controller.Controller;
 import model.DataModel;
@@ -17,6 +18,7 @@ public class View implements Observer{
 	private JButton button;
 	private JFrame frame;
 	private JPanel panel;
+	private JTable table;
 	
 	public View(DataModel model)
 	{
@@ -49,25 +51,36 @@ public class View implements Observer{
 	 * TODO Moet data uit output halen. 
 	 * @return
 	 */
-	public void setTable(){
+	public void setTable(String tableData){
 		
-
-		JTable table = new JTable(2,2); //kan data niet uit outputstream trekken, is nodig voor aanmaken table
+		
+		//String formattedData = tableData.replaceAll("\\<.*\\>.", "");
+		String formattedData = tableData.replaceAll("\\>", "\\>\n");
+		System.out.println(formattedData);
+		//String splittedTableData[] = tableData.replaceAll("\\>", "\\>\n");
+		//for(String hoi : splittedTableData){
+		//	System.out.println(hoi);
+		//}
+		String[] colNames = {"name", "surname","job"};
+		panel.add(new JTextField(tableData));
+		DefaultTableModel model = new DefaultTableModel(colNames, 4);
+		JTable table = new JTable(model); //kan data niet uit outputstream trekken, is nodig voor aanmaken table
 		panel.add(table);
-	
+		frame.pack();
 		frame.repaint();
+		
 		
 		
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		String syntax = "N-TRIPLE"; // also try "N-TRIPLE" and "TURTLE"
+/*		String syntax = "N-TRIPLE"; // also try "N-TRIPLE" and "TURTLE"
 		StringWriter out = new StringWriter();
 		model.getModel().write(out,syntax);
 		String result = out.toString();
-		System.out.println("hij update dingen" + result);
-		setTable();
+		System.out.println("hij update dingen" + result);*/
+		setTable(model.writeRDFToView());
 		//System.out.println(result);
 	}
 	
