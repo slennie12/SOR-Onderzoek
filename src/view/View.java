@@ -62,7 +62,15 @@ public class View implements Observer{
 	//	String strings[];
 		int i = 0;
 		ArrayList<List> lists = new ArrayList<List>();
-		for(splittedTableData.length < 0)
+		ArrayList<String> data = new ArrayList<String>();;
+		for(String hoi : splittedTableData){
+			data.add(hoi);
+			i++;
+			if(i == 3){
+				lists.add(data);
+				data = new ArrayList<String>();
+			}
+			
 			
 		}
 		String[] colNames = {"Subject", "Predicate","Object"};
