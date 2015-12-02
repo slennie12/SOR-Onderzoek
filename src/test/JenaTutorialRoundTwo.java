@@ -1,17 +1,18 @@
 package test;
 import java.io.InputStream;
-import java.util.UUID;
+import java.util.Iterator;
 
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
-import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.update.UpdateExecutionFactory;
-import org.apache.jena.update.UpdateFactory;
-import org.apache.jena.update.UpdateProcessor;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.util.FileManager;
 import org.apache.jena.vocabulary.VCARD;
 
@@ -99,6 +100,17 @@ public class JenaTutorialRoundTwo {
         QueryExecution qe = QueryExecutionFactory.sparqlService(
                 "http://localhost:3030/ElvisImpersonators/query", "SELECT * WHERE {?x ?r ?y}");
         ResultSet results = qe.execSelect();
+        while (results.hasNext())
+        {
+        	QuerySolution soln = results.nextSolution() ;
+        	Iterator<String> iter = soln.varNames();
+  		  	System.out.println("hier wel");
+	  		while(iter.hasNext())
+	  		{
+	  			System.out.println("hier niet");
+	  			System.out.println(iter.next());
+	  		}
+	    }
         qe.close();
 	}
 }
