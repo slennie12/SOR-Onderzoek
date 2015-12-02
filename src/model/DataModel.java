@@ -57,9 +57,9 @@ public class DataModel extends Observable{
 	{
 		String givenName = "test";
 		String surName = "piet" + i;
-		Resource carloName = RDFModel.createResource()
+		/*Resource carloName = RDFModel.createResource()
             	.addProperty(VCARD.Given, givenName)
-            	.addProperty(VCARD.Family, surName);
+            	.addProperty(VCARD.Family, surName);*/
 		setChanged();
 		notifyObservers();
 		i++;

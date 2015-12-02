@@ -34,11 +34,11 @@ public class View implements Observer{
 	
 	private void initGUI()
 	{
-		frame = new JFrame();
+		frame = new JFrame("Jena SOR-Onderzoek");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel = new JPanel();
-		panel.setPreferredSize(new Dimension(500,500));
-		button = new JButton();
+		panel.setPreferredSize(new Dimension(700,500));
+		button = new JButton("Klik voor ophalen data");
 		panel.add(button);
 		frame.add(panel);
 		frame.pack();
@@ -51,10 +51,20 @@ public class View implements Observer{
 	}
 	
 	/**
-	 * Returns the frame for the 
+	 * Enorm lelijke methode waar veel te moeilijk over nagedacht is 
+	 * en waarschijnlijk in twee regels code kan worden opgelost
 	 * 
-	 * TODO Moet data uit output halen. 
-	 * @return
+	 * Haal een erg lange String binnen, wordt gesplit en in een ArrayList gezet die
+	 * vervolgens in een ArrayList wordt gezet
+	 * 
+	 * Vervolgens wordt er in een foreach loop rijen toegevoegd aan de tabel
+	 * (Nadat natuurlijk de ArrayList weer terug gezet is naar een Array,
+	 *  anders snapt JTable het niet)
+	 *  
+	 *  Dit resultaat is dan ook wanneer er te weinig tijd in wordt gestoken
+	 * 
+	 * TODO Fixen waarom colom namen niet wordt weergegeven
+	 * TODO Code veel kleiner maken, onnodig groot
 	 */
 	public void setTable(String tableData){
 		
@@ -64,7 +74,7 @@ public class View implements Observer{
 		String splittedTableData[] = formattedData.split("\\n");
 	//	String strings[];
 		int i = 0;
-		ArrayList<List> lists = new ArrayList<List>();
+		ArrayList<ArrayList<String>> lists = new ArrayList<ArrayList<String>>();
 		ArrayList<String> data = new ArrayList<String>();;
 		for(String hoi : splittedTableData){
 			data.add(hoi);
@@ -72,12 +82,23 @@ public class View implements Observer{
 			if(i == 3){
 				lists.add(data);
 				data = new ArrayList<String>();
+				i = 0;
+				System.out.println(i);
 			}
+			
 		}
-		String[] colNames = {"Subject", "Predicate","Object"};
-		panel.add(new JTextField(tableData));
-		DefaultTableModel tableModel = new DefaultTableModel(colNames, 4);
+		System.out.println(lists);
+		String[] coloms = new String[]{"Subject", "Predicate","Object"};
+		
+		DefaultTableModel tableModel = new DefaultTableModel(coloms, 0);
+		for(ArrayList<String> o: lists){
+			tableModel.addRow(o.toArray());
+		}
+		
 		JTable table = new JTable(tableModel); //kan data niet uit outputstream trekken, is nodig voor aanmaken table
+		
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		table.setPreferredSize(new Dimension(700,500));
 		panel.add(table);
 		frame.pack();
 		frame.repaint();
