@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -56,12 +58,14 @@ public class View implements Observer{
 		
 		//String formattedData = tableData.replaceAll("\\<.*\\>.", "");
 		String formattedData = tableData.replaceAll("\\>", "\\>\n");
-		System.out.println(formattedData);
-		//String splittedTableData[] = tableData.replaceAll("\\>", "\\>\n");
-		//for(String hoi : splittedTableData){
-		//	System.out.println(hoi);
-		//}
-		String[] colNames = {"name", "surname","job"};
+		String splittedTableData[] = formattedData.split("\\n");
+	//	String strings[];
+		int i = 0;
+		ArrayList<List> lists = new ArrayList<List>();
+		for(splittedTableData.length < 0)
+			
+		}
+		String[] colNames = {"Subject", "Predicate","Object"};
 		panel.add(new JTextField(tableData));
 		DefaultTableModel model = new DefaultTableModel(colNames, 4);
 		JTable table = new JTable(model); //kan data niet uit outputstream trekken, is nodig voor aanmaken table
